@@ -101,14 +101,15 @@ public static function create( string $slug, string $username, string $password,
         $height = (float) $product->get_height() ?: 1;
         $mass   = (float) $product->get_weight() ?: 1;
 
-        for ( $i = 0; $i < $quantity; $i++ ) {
-            $parcels[] = [
-                'parcelLength' => $length,
-                'parcelWidth'  => $width,
-                'parcelHeight' => $height,
-                'parcelMass'   => $mass,
-            ];
-        }
+        
+        $parcels[] = [
+            'parcelQTY' => $quantity,
+            'parcelLength' => $length,
+            'parcelWidth'  => $width,
+            'parcelHeight' => $height,
+            'parcelMass'   => $mass,
+        ];
+        
 
     endforeach;
 

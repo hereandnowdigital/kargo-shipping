@@ -16,9 +16,10 @@
   class shipping_method extends \WC_Shipping_Method {
 
     private string $slug;
-    private int $max_length = 120; //cm
-    private int $max_width  = 120; //cm
-    private int $max_height = 100; //cm
+    private int $max_allowed_length = 120; //cm
+    private int $max_allowd_width  = 120; //cm
+    private int $max_allowed_height = 120; //cm
+    private int $max_allowed_weight = 50; //kg
 
     private array $allowed_country_codes = ['ZA'];
 
@@ -190,7 +191,7 @@
             $width  = (float) $product->get_width()  * $factor;
             $height = (float) $product->get_height() * $factor;
 
-            if ( $length > $this->max_length || $width > $this->max_width|| $height > $this->max_height )
+            if ( $length >= $this->max_allowed_length || $width >= $this->max_allowd_width|| $height >= $this->max_allowed_height )
                 return true;
 
         }

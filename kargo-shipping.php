@@ -1,8 +1,8 @@
 <?php
   /**
-   * Plugin Name: Kargo National Shipping
+   * Plugin Name: Kargo Shipping
    * Description: Shipping method for WooCommerce that integrates with Kargo National shipping services.
-   * Version: 0.0.2
+   * Version: 0.0.3
    * Requires at least: 6.7
    * Requires PHP: 8.2
    * WC requires at least: 3.0.0
@@ -21,7 +21,7 @@
 
 
   // Define plugin constants
-  define('KARGO_NS_VERSION', '0.0.2');
+  define('KARGO_NS_VERSION', '0.0.3');
   define('KARGO_NS_PLUGIN_DIR', plugin_dir_path(__FILE__));
   define('KARGO_NS_PLUGIN_URL', plugin_dir_url(__FILE__));
   define('KARGO_NS_PLUGIN_BASENAME', plugin_basename(__FILE__));

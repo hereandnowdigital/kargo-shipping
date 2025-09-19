@@ -89,10 +89,11 @@ public static function create( string $slug, string $username, string $password,
       $parcels = [];
 
       foreach ( $cart_items as $item ) :
+
         $product  = $item['data'];
         $quantity = (int) $item['quantity'];
 
-        if ( ! $product instanceof WC_Product ) 
+        if ( ! $product instanceof \WC_Product ) 
             continue;
 
         // Dimensions (Woo stores in cm, weight in kg by default)
@@ -100,8 +101,7 @@ public static function create( string $slug, string $username, string $password,
         $width  = (float) $product->get_width()  ?: 1;
         $height = (float) $product->get_height() ?: 1;
         $mass   = (float) $product->get_weight() ?: 1;
-
-        
+       
         $parcels[] = [
             'parcelQTY' => $quantity,
             'parcelLength' => $length,
@@ -111,8 +111,7 @@ public static function create( string $slug, string $username, string $password,
         ];
         
 
-    endforeach;
-
+      endforeach;
       
       $params = array(
         'username' => $this->username,
@@ -125,7 +124,6 @@ public static function create( string $slug, string $username, string $password,
           'RateEnquiryParcelsParameters' => $parcels
         ] 
       );
- 
 
       try {
         $client = new \SoapClient( $this->wsdl_url, [
@@ -154,74 +152,74 @@ public static function create( string $slug, string $username, string $password,
       }
     }
 
-        /**
-         * Process rate response from API
-         *
-         * @param $response_json
-         *
-         * @return array|bool Rate data on success, false on failure
-         */
-	    private function parse_rate_response($response_json) {
-		    $response_array = json_decode( json_encode($response_json), true );
-		    $response = $response_array['any'];
+    /**
+     * Process rate response from API
+     *
+     * @param $response_json
+     *
+     * @return array|bool Rate data on success, false on failure
+     */
+    private function parse_rate_response($response_json) {
+      $response_array = json_decode( json_encode($response_json), true );
+      $response = $response_array['any'];
 
-		    if (!is_string($response)) {
-			    woo_logger::error('Response is not a string.');
-			    return false;
-		    }
+      if (!is_string($response)) {
+        woo_logger::error('Response is not a string.');
+        return false;
+      }
 
-		    // Extract the KREW section as a raw string
-		    $start = strpos($response, '<KREW ');
-		    if ($start === false) {
-			    $start = strpos($response, '<KREW>');
-		    }
-     
-		    if ($start === false) {
-			    woo_logger::error('No KREW element found in response');
-			    return false;
-		    }
+      // Extract the KREW section as a raw string
+      $start = strpos($response, '<KREW ');
+      if ($start === false) {
+        $start = strpos($response, '<KREW>');
+      }
+    
+      if ($start === false) {
+        woo_logger::error('No KREW element found in response');
+        return false;
+      }
 
-		    $end = strpos($response, '</KREW>', $start);
-		    if ($end === false) {
-			    woo_logger::error('No closing KREW tag found');
-			    return false;
-		    }
+      $end = strpos($response, '</KREW>', $start);
+      if ($end === false) {
+        woo_logger::error('No closing KREW tag found');
+        return false;
+      }
 
-		    // Extract the KREW content with its tags
-		    $krew_length = $end - $start + 7; // +7 for '</KREW>'
-		    $krew_xml = substr($response, $start, $krew_length);
+      // Extract the KREW content with its tags
+      $krew_length = $end - $start + 7; // +7 for '</KREW>'
+      $krew_xml = substr($response, $start, $krew_length);
 
-		    // Extract the fields we need using simple string functions
-		    $result = array();
-		    $fields = array(
-			    'RequestStatusSuccess',
-			    'RequestErrorMessage',
-			    'Subtotal',
-			    'VAT',
-			    'Total',
-			    'AccountActive',
-			    'AccountStatus'
-		    );
+      // Extract the fields we need using simple string functions
+      $result = array();
+      $fields = array(
+        'RequestStatusSuccess',
+        'RequestErrorMessage',
+        'Subtotal',
+        'VAT',
+        'Total',
+        'AccountActive',
+        'AccountStatus'
+      );
 
-		    foreach ($fields as $field) {
-			    $field_start = strpos($krew_xml, '<' . $field . '>');
-			    if ($field_start !== false) {
-				    $field_start += strlen($field) + 2; // +2 for '<>'
-				    $field_end = strpos($krew_xml, '</' . $field . '>', $field_start);
-				    if ($field_end !== false) {
-					    $value = substr($krew_xml, $field_start, $field_end - $field_start);
-					    $result[$field] = $value;
-				    }
-			    }
-		    }
+      foreach ($fields as $field) {
+        $field_start = strpos($krew_xml, '<' . $field . '>');
+        if ($field_start !== false) {
+          $field_start += strlen($field) + 2; // +2 for '<>'
+          $field_end = strpos($krew_xml, '</' . $field . '>', $field_start);
+          if ($field_end !== false) {
+            $value = substr($krew_xml, $field_start, $field_end - $field_start);
+            $result[$field] = $value;
+          }
+        }
+      }
 
-		    if (!empty($result) && isset($result['Subtotal'])) {
-			    woo_logger::info('Successfully extracted response data: ' . print_r($result, true));
-			    return $result;
-		    }
+      if (!empty($result) && isset($result['Subtotal'])) {
+        woo_logger::info('Successfully extracted response data: ' . print_r($result, true));
+        return $result;
+      }
 
-		    woo_logger::error('Could not extract rate data from response');
-		    return false;
-	    }
+      woo_logger::error('Could not extract rate data from response');
+      return false;
+    }
 
   }

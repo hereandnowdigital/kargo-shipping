@@ -34,7 +34,7 @@ class woo_logger {
 	 */
 	public function __construct( protected string $source, protected bool $enabled = false ) {
 		
-		$this->enabled = get_option( $this->source . '_debug', false );
+		$this->enabled = get_option( $this->source . '_debug', true );
 		
 		//if ( $this->enabled ) 
 			$this->logger = wc_get_logger();

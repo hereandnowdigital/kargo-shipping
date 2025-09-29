@@ -29,7 +29,7 @@ You will need the following details during configuration:
 
 Download the latest stable release of the plugin as a `.zip` file:
 
-**[Download Latest Release (v0.0.3)](https://github.com/hereandnowdigital/kargo-shipping/releases/tag/0.0.3)**
+**[Download Latest Release](https://github.com/hereandnowdigital/kargo-shipping/releases/latest)**
 
 ### 3.2. How to Install
 

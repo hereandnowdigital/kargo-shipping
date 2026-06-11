@@ -2,7 +2,7 @@
   /**
    * Plugin Name: Kargo Shipping
    * Description: Shipping method for WooCommerce that integrates with Kargo National shipping services.
-   * Version: 0.0.4
+   * Version: 1.0.1
    * Requires at least: 6.7
    * Requires PHP: 8.2
    * WC requires at least: 3.0.0
@@ -21,15 +21,13 @@
 
 
   // Define plugin constants
-  define('KARGO_NS_VERSION', '0.0.4');
+  define('KARGO_NS_VERSION', '1.0.1');
   define('KARGO_NS_PLUGIN_DIR', plugin_dir_path(__FILE__));
   define('KARGO_NS_PLUGIN_URL', plugin_dir_url(__FILE__));
   define('KARGO_NS_PLUGIN_BASENAME', plugin_basename(__FILE__));
   $slug = sanitize_title( dirname( KARGO_NS_PLUGIN_BASENAME ) ); 
   $slug = str_replace( '-', '_', $slug ); 
   define('KARGO_NS_PLUGIN_SLUG', $slug );
-
-$slug = str_replace( '-', '_', $slug ); 
 
   add_action( 'before_woocommerce_init', 'kargo_shipping_HPOS' );
   function kargo_shipping_HPOS() {

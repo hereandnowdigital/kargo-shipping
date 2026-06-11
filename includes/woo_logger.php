@@ -99,15 +99,15 @@ class woo_logger {
 	}
 
 	public static function notice ( $message, array $context = [] ) {
-		self::log( 'error', $message, $context );
+		self::log( 'notice', $message, $context );
 	}
 
 	public static function info ( $message, array $context = [] ) {
-		self::log( 'warning', $message, $context );
+		self::log( 'info', $message, $context );
 	}
 
 	public static function debug ( $message, array $context = [] ) {
-		self::log( 'warning', $message, $context );
+		self::log( 'debug', $message, $context );
 	}
 
 }

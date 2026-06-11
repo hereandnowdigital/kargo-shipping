@@ -40,7 +40,6 @@
 
 public static function create( string $slug, string $username, string $password, string $account_number, string $origin_postcode ): self {
     $instance = new self();
-    $instance->username       = $slug;
     $instance->username       = $username;
     $instance->password       = $password;
     $instance->account_number = $account_number;
@@ -146,7 +145,7 @@ public static function create( string $slug, string $username, string $password,
         woo_logger::error('Invalid API response');
         return false;
 
-      } catch (Exception $e) {
+      } catch (\Throwable $e) {
         woo_logger::error('API Error: ' . $e->getMessage());
         return false;
       }

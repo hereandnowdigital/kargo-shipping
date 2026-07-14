@@ -75,7 +75,7 @@ Kargo National Shipping will only be available to the customer if **all** the fo
 | **Destination** | Only available for destinations **inside South Africa**. |
 | **Product Data** | **All items** in the customer's cart must have **weight or dimensions** (Width, Height, and Depth) accurately entered in the WooCommerce product data settings. |
 | **Maximum Weight** | Individual item weight must be **less than 150kg**. |
-| **Maximum Dimensions**| Individual item dimensions (Width, Height, or Depth) must be **less than 120cm**. |
+| **Maximum Dimensions**| Individual item dimensions (Width, Height, or Depth) must be **less than 170cm**. |
 
 If any item in the cart violates these rules, the **Kargo National Shipping** method will not be displayed, and the customer will not be able to select it.
 

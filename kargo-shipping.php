@@ -2,7 +2,7 @@
   /**
    * Plugin Name: Kargo Shipping
    * Description: Shipping method for WooCommerce that integrates with Kargo National shipping services.
-   * Version: 1.0.1
+   * Version: 1.0.2
    * Requires at least: 6.7
    * Requires PHP: 8.2
    * WC requires at least: 3.0.0
@@ -15,6 +15,14 @@
    * @package kargo-shipping
    *
    **/
+
+/* == Changelog ==
+  *
+  * = 1.0.2 - 20260714
+  * * - Update: Change max dimension limits to 170cm
+  *
+  */
+
 
   if ( ! defined( 'ABSPATH' ) )
     exit; // Exit if accessed directly.

@@ -16,9 +16,9 @@
   class shipping_method extends \WC_Shipping_Method {
 
     private string $slug;
-    private int $max_allowed_length = 170; //cm
-    private int $max_allowd_width  = 170; //cm
-    private int $max_allowed_height = 170; //cm
+    private int $max_allowed_length = 175; //cm
+    private int $max_allowd_width  = 175; //cm
+    private int $max_allowed_height = 175; //cm
     private int $max_allowed_weight = 50; //kg
 
     private array $allowed_country_codes = ['ZA'];
